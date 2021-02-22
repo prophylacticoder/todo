@@ -21,8 +21,7 @@ def todo_response(request, id=None):
         js_data = json.loads(request.body.decode())
         task = Task(name=js_data['task'])
         task.save()
-
-        return JsonResponse(data_load(), safe=False)
+        return JsonResponse({'id': task.id, 'task': task.name, 'done': task.done}, safe=False)
     elif request.method == 'PUT':
 
         task = Task.objects.get(id=id)
